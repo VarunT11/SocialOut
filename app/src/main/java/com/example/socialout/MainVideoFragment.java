@@ -51,5 +51,6 @@ public class MainVideoFragment extends Fragment {
 
         FragmentStateAdapter stateAdapter = new ScreenSlidePagerAdapter(requireActivity());
         viewPager2.setAdapter(stateAdapter);
+        viewPager2.setOffscreenPageLimit(5);
     }
 }
