@@ -14,6 +14,9 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.MediaItem;
@@ -57,12 +60,17 @@ public class VideoFragment extends Fragment {
     private MainViewModel mainViewModel;
     private Experience experience;
     StyledPlayerView playerView;
+    TextView tvCity, tvDescription;
+    Button btnBook;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         playerView = view.findViewById(R.id.player_view);
+        tvCity = view.findViewById(R.id.tvCity);
+        tvDescription = view.findViewById(R.id.tvDesciption);
+        btnBook = view.findViewById(R.id.btnBook);
 
         mainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
         mainViewModel.getExperienceList().observe(getViewLifecycleOwner(), experiences -> {
@@ -72,6 +80,13 @@ public class VideoFragment extends Fragment {
     }
 
     private void updateViews() {
+        tvCity.setText(experience.getCity());
+        tvDescription.setText(experience.getSummary());
+
+        btnBook.setOnClickListener(v -> {
+            Toast.makeText(requireContext(), "Booking the City "+experience.getCity(), Toast.LENGTH_SHORT).show();
+        });
+
         ExoPlayer player = new ExoPlayer.Builder(requireContext()).build();
         playerView.setPlayer(player);
         playerView.setUseController(false);

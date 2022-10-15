@@ -29,7 +29,7 @@
         app:layout_constraintEnd_toEndOf="@+id/player_view"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/player_view"
-        app:layout_constraintBottom_toTopOf="@+id/place"
+        app:layout_constraintBottom_toTopOf="@+id/tvCity"
         >
 
         <com.like.LikeButton
@@ -69,22 +69,22 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/place"
+        android:id="@+id/tvCity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:fontFamily="@font/montserratmedium"
         android:padding="8dp"
-        android:layout_margin="8dp"
         android:text="Rishikesh"
         android:textColor="#fff"
         android:textSize="16sp"
         android:textStyle="bold"
         android:translationZ="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/desc"
-        app:layout_constraintStart_toStartOf="@+id/desc" />
+        app:layout_constraintBottom_toTopOf="@+id/tvDesciption"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn"
+        android:id="@+id/btnBook"
         style="@style/Widget.Material3.Button.OutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -93,19 +93,20 @@
         android:textColor="#fff"
         android:textSize="12sp"
         app:cornerRadius="12dp"
-        app:layout_constraintBottom_toBottomOf="@+id/place"
-        app:layout_constraintStart_toEndOf="@+id/place"
-        app:layout_constraintTop_toTopOf="@+id/place" />
+        app:layout_constraintBottom_toBottomOf="@+id/tvCity"
+        app:layout_constraintStart_toEndOf="@+id/tvCity"
+        app:layout_constraintTop_toTopOf="@+id/tvCity" />
 
     <TextView
-        android:id="@+id/desc"
+        android:id="@+id/tvDesciption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/montserratmedium"
-        android:padding="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="16dp"
+        android:fontFamily="@font/montserratmedium"
+        android:padding="8dp"
         android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a"
+        android:textAlignment="textStart"
         android:textColor="#fff"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/player_view"

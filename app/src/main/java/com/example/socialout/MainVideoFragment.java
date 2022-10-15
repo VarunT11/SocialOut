@@ -65,16 +65,16 @@ public class MainVideoFragment extends Fragment {
 
         FragmentStateAdapter stateAdapter = new ScreenSlidePagerAdapter(requireActivity());
         viewPager2.setAdapter(stateAdapter);
-        viewPager2.setOffscreenPageLimit(5);
+//        viewPager2.setOffscreenPageLimit(5);
 
         mainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
-        navController = Navigation.findNavController(requireActivity(), R.id.navHostMain);
+        navController = Navigation.findNavController(requireView());
         apiSingleton = ApiSingleton.getInstance(requireActivity());
 
         fetchVideos();
     }
 
-    String URL_VIDEOS = "";
+    String URL_VIDEOS = "/experience";
 
     private void fetchVideos(){
         apiSingleton.sendGetRequest(URL_VIDEOS, (success, result) -> {

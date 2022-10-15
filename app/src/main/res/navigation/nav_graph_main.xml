@@ -9,5 +9,13 @@
         android:id="@+id/mainVideoFragment"
         android:name="com.example.socialout.MainVideoFragment"
         android:label="fragment_main_video"
-        tools:layout="@layout/fragment_main_video" />
+        tools:layout="@layout/fragment_main_video" >
+        <action
+            android:id="@+id/action_mainVideoFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.socialout.SearchFragment"
+        android:label="SearchFragment" />
 </navigation>
