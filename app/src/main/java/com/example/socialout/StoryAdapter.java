@@ -10,37 +10,39 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder>{
-    private User[] listdata;
+import java.util.ArrayList;
 
-    // RecyclerView recyclerView;
-    public StoryAdapter(User[] listdata) {
-        this.listdata = listdata;
+public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder>{
+
+    public interface StoryItemClickListener{
+        void onStoryItemClick(int userId);
     }
+
+    private ArrayList<User> listData;
+    private StoryItemClickListener itemClickListener;
+
+    public StoryAdapter(ArrayList<User> listData, StoryItemClickListener itemClickListener) {
+        this.listData = listData;
+        this.itemClickListener = itemClickListener;
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View listItem= layoutInflater.inflate(R.layout.story_item, parent, false);
-        ViewHolder viewHolder = new ViewHolder(listItem);
-        return viewHolder;
+        return new ViewHolder(listItem);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final User myListData = listdata[position];
+        User myListData = listData.get(position);
         holder.imageView.setImageResource(R.drawable.ic_person);
-        holder.imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(view.getContext(),"click on item: ",Toast.LENGTH_LONG).show();
-            }
-        });
+        holder.imageView.setOnClickListener(view -> itemClickListener.onStoryItemClick(myListData.getUserId()));
     }
-
 
     @Override
     public int getItemCount() {
-        return listdata.length;
+        return listData.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

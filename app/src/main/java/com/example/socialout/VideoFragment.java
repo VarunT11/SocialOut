@@ -8,6 +8,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,8 @@ import android.view.ViewGroup;
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.ui.StyledPlayerView;
+
+import java.util.ArrayList;
 
 public class VideoFragment extends Fragment {
 
@@ -33,7 +37,7 @@ public class VideoFragment extends Fragment {
         return fragment;
     }
 
-    private int position=0;
+    private int position = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,22 +54,31 @@ public class VideoFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_video, container, false);
     }
 
+    private MainViewModel mainViewModel;
+    private Experience experience;
+    StyledPlayerView playerView;
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        MediaItem mediaItem = MediaItem.fromUri(Uri.parse("https://assets.mixkit.co/videos/preview/mixkit-taking-photos-from-different-angles-of-a-model-34421-large.mp4"));
-        StyledPlayerView playerView = view.findViewById(R.id.player_view);
+        playerView = view.findViewById(R.id.player_view);
 
+        mainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
+        mainViewModel.getExperienceList().observe(getViewLifecycleOwner(), experiences -> {
+            experience = experiences.get(position);
+            updateViews();
+        });
+    }
+
+    private void updateViews() {
         ExoPlayer player = new ExoPlayer.Builder(requireContext()).build();
-
         playerView.setPlayer(player);
         playerView.setUseController(false);
 
-        player.setMediaItem(mediaItem);
+        player.setMediaItem(MediaItem.fromUri(Uri.parse(experience.getVideoUrl())));
         player.setRepeatMode(REPEAT_MODE_ALL);
         player.prepare();
         player.play();
-
     }
 }
