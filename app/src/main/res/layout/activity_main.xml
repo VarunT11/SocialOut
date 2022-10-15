@@ -77,4 +77,19 @@
         tools:layout="@layout/fragment_main_video"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"/>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/filter"
+        android:layout_marginTop="140dp"
+        app:elevation="6dp"
+        android:padding="8dp"
+        android:backgroundTint="#8100fe"
+        app:tint="@android:color/white"
+        app:borderWidth="0dp"
+        app:pressedTranslationZ="12dp"
+        android:layout_gravity="top|end"
+        app:srcCompat="@drawable/ic_filter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
